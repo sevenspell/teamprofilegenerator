@@ -114,7 +114,7 @@ const internArray = [];
 //3. ask questions and get data to push to the relevant arrays
 
 // confirm if user is a manager. If so, answer Manager questions
-function verifyManager() {
+function startProcess() {
     inquirer.prompt(managerVerificationQuestion)
         .then(({ managerV }) => {
             if (`${managerV}` === "true") {
@@ -225,97 +225,7 @@ function promptRoleSelection(response){
 }
 
 //start the process
-verifyManager();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// inquirer.prompt(managerVerificationQuestion)
-
-//     .then(function promptEmployeeQuestions({ confirmV }) {
-
-//         if (`${confirmV}` === "false") {
-
-//             return "Entries required to be input by a manager.";
-
-//         } if (`${confirmV}` === "true") {
-
-//             inquirer.prompt(employeeQuestions)
-
-//                 .then(async function promptNextQuestion({ titleV, nameV, idV, emailV }) {
-
-//                     const title = `${titleV}`;
-
-//                     if (title === "Manager") {
-
-//                         await inquirer.prompt(managerQuestion).then(function getManagerData({ officeNumberV }) {
-
-//                             const managerData = new Manager(nameV, idV, emailV, officeNumberV);
-
-//                             const managerName = managerData.getName({ nameV });
-//                             const managerID = managerData.getId({ idV });
-//                             const managerEmail = managerData.getEmail({ emailV });
-//                             const managerOfficeNum = managerData.getOfficeNumber({ officeNumberV });
-
-//                             managerArray.push(managerName, managerID, managerEmail, managerOfficeNum);
-//                             employeesArray.push(managerData);
-
-//                             console.log(managerArray, employeesArray);
-//                             console.log(employeesArray + " line 120");
-
-//                         }).catch(function (error) {
-//                             console.log(error);
-//                         })
-
-//                     } if (title === "Intern") {
-
-//                         await inquirer.prompt(internQuestion).then(function getInternData({ schoolV }) {
-
-//                             const internData = new Intern(nameV, idV, emailV, schoolV);
-
-//                             const internName = internData.getName({ nameV });
-//                             const internID = internData.getId({ idV });
-//                             const internEmail = internData.getEmail({ emailV });
-//                             const internGithub = internData.getSchool({ schoolV });
-
-//                             internArray.push(internName, internID, internEmail, internGithub);
-//                             console.log(internArray);
-
-//                         }).catch(function (error) {
-//                             console.log(error);
-//                         })
-
-//                     } if (title === "Engineer") {
-
-//                         await inquirer.prompt(engineerQuestion).then(function getEngineerData({ usernameV }) {
-
-//                             const engineerData = new Engineer(nameV, idV, emailV, usernameV);
-
-//                             const engineerName = engineerData.getName({ nameV });
-//                             const engineerID = engineerData.getId({ idV });
-//                             const engineerEmail = engineerData.getEmail({ emailV });
-//                             const engineerGithub = engineerData.getGithub({ usernameV });
-
-//                             engineerArray.push(engineerName, engineerID, engineerEmail, engineerGithub);
-//                             console.log(engineerArray);
-
-//                         }).catch(function (error) {
-//                             console.log(error);
-//                         })
-//                     }
-//                 })
-//         }
-//     })
+startProcess();
 
 
 
