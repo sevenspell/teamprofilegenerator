@@ -1,5 +1,4 @@
-function generateMainHTML(data) {
-    return `<html lang="en">
+<html lang="en">
 
     <head>
         <meta charset="UTF-8">
@@ -93,7 +92,7 @@ function generateMainHTML(data) {
                 </div>
             </div>
             <div class="container">
-            ${data}
+            [object Object]
             </div>
     
         </section>
@@ -112,66 +111,4 @@ function generateMainHTML(data) {
         </section>
     </body>
     
-    </html>`};
-
-function generateManagerHTML(data) {
-    return `<div class="row justify-content-center">
-    <div class="col-sm-12 manager">
-        <div id="cardM" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-            <div class="card-header cardTitle">${data.name}
-                <br>
-                <i class="fas fa-user-tie"></i>
-                  Manager
-            </div>
-            <div class="card-body bg-warning cardContent">
-                <p class="card-text bg-warning mb-3">ID: ${data.id}</p>
-                <p class="card-text bg-warning mb-3">Email: <a href= "mailto: ${data.email}"> ${data.email}</a></p>
-                <p class="card-text bg-warning mb-3">Office Number: ${data.officeNumber}</p>
-            </div>
-        </div>
-    </div>
-</div>`
-};
-
-function generateEngineerHTML(data) {
-    return `<div class="row justify-content-center">
-    <div class="col-sm-12 engineer">
-        <div id="cardE" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-            <div class="card-header cardTitle">${data.name}
-                <br>
-                <i class="fas fa-user-astronaut"></i>
-                Engineer
-            </div>
-            <div class="card-body bg-info cardContent">
-                <p class="card-text bg-info mb-3">ID: ${data.id}</p>
-                <p class="card-text bg-info mb-3">Email: <a href="mailto: ${data.email}"> ${data.email}</a></p>
-                <p class="card-text bg-info mb-3">Github: <a href="https://github.com/${data.github}" target="blank">
-                        https://github.com/${data.github}</a></p>
-            </div>
-        </div>
-    </div>
-</div>`
-};
-
-function generateInternHTML(data) {
-    return `<div class="row justify-content-center">
-    <div class="col-sm-12 intern">
-        <div id="cardI" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-            <div class="card-header cardTitle">${data.name}
-                <br>
-                <i class="fas fa-user-graduate"></i>
-                Intern
-            </div>
-            <div class="card-body bg-primary cardContent">
-                <p class="card-text bg-primary mb-3">ID: ${data.id}</p>
-                <p class="card-text bg-primary mb-3">Email: <a href="mailto: ${data.email}"> ${data.email}</a></p>
-                <p class="card-text bg-primary mb-3">School: ${data.school}</p>
-            </div>
-        </div>
-    </div>
-</div>`
-};
-
-
-
-module.exports = { generateMainHTML: generateMainHTML, generateManagerHTML: generateManagerHTML, generateEngineerHTML: generateEngineerHTML, generateInternHTML: generateInternHTML };
+    </html>

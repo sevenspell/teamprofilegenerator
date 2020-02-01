@@ -137,7 +137,7 @@ function promptManagerQuestion(response) {
             managerArray.push(managerData);
             employeesArray.push(managerData);
 
-            employeesArray.forEach(function(employeesArray){
+            managerArray.forEach(function (employeesArray) {
                 getEmployeeHTML(employeesArray);
             })
 
@@ -177,13 +177,7 @@ function promptEngineerQuestion() {
             engineerArray.push(engineerData);
             employeesArray.push(engineerData);
 
-            // employeesArray.forEach(function(employeesArray){
-            //     if (employeesArray.title === "Manager"){
-            //         return getEmployeeHTML(employeesArray)
-            //     }
-            // })
-
-            employeesArray.forEach(function(employeesArray){
+            engineerArray.forEach(function (employeesArray) {
                 getEmployeeHTML(employeesArray);
             })
 
@@ -209,13 +203,7 @@ function promptInternQuestion() {
             internArray.push(internData);
             employeesArray.push(internData);
 
-            // employeesArray.forEach(function(employeesArray){
-            //     if (employeesArray.title === "Manager"){
-            //         return getEmployeeHTML(employeesArray)
-            //     }
-            // })
-
-            employeesArray.forEach(function(employeesArray){
+            internArray.forEach(function (employeesArray) {
                 getEmployeeHTML(employeesArray);
             })
 
@@ -237,75 +225,63 @@ function promptRoleSelection(response) {
                 promptInternQuestion();
             } else {
                 console.log("Congratulations, you've completed the org chart.");
-                // console.log("start: " + managerArray, engineerArray, managerArray, internArray, managerArray + " end")
-                // console.log("start: " + employeesArray, employeesArray, employeesArray + " end")
+                getMainHTML(response, htmlEmployee);
+                createHTMLFile(htmlMainFile);
             }
         })
 }
 
 //start the process
-startProcess();
+startProcess()
 
-
-function getMainHTML(response) {
-
-    const htmlMainFile = generateHTML.generateMainHTML(response);
-    console.log(htmlMainFile + " THIS IS MAIN HTML");
-
-}
-
-// getMainHTML();
-
-
+var htmlEmployee = [];
 
 function getEmployeeHTML(data) {
 
-    var htmlManagerFile="";
-    var htmlEngineerFile="";
-    var htmlInternFile="";
+    var htmlManagerFile = "";
+    var htmlEngineerFile = "";
+    var htmlInternFile = "";
 
-    if (data.title === "Manager"){
+    if (data.title === "Manager") {
         htmlManagerFile = generateHTML.generateManagerHTML(data);
-
-    } else if (data.title === "Engineer"){
+        htmlEmployee.push(htmlManagerFile);
+    } else if (data.title === "Engineer") {
         htmlEngineerFile = generateHTML.generateEngineerHTML(data);
-
-    } else if (data.title === "Intern"){
+        htmlEmployee.push(htmlEngineerFile);
+    } else if (data.title === "Intern") {
         htmlInternFile = generateHTML.generateInternHTML(data);
-
+        htmlEmployee.push(htmlInternFile);
     } else {
         console.log("No HTML found");
     }
 
-    const htmlEmployee = (htmlManagerFile + htmlEngineerFile + htmlInternFile)
-    console.log(htmlEmployee + " line 280")
+    convertArrayToString(htmlEmployee);
 }
 
 
+function convertArrayToString(htmlEmployee) {
+    var htmlEmployeeString = htmlEmployee.join("<br>");
+    console.log(htmlEmployeeString + "STRING TEST")
+}
+
+var htmlEmployeeString = "";
+var htmlMainFile = "";
+
+function getMainHTML(htmlEmployeeString) {
+
+    htmlMainFile = generateHTML.generateMainHTML(htmlEmployeeString);
+    console.log(htmlMainFile + " THIS IS MAIN HTML");
+}
 
 
+function createHTMLFile(htmlMainFile) {
 
+    fs.writeFile("./output/team.html", htmlMainFile, function (err) {
+        if (err) {
+            return console.log(err)
+        }
+        console.log("HTML file successfully created!")
+    })
 
-
-
-
-
-
-
-
-
-        // .then(function (githubData) {
-
-        //     //5. feed data into generateHTML() and generate
-
-        //     // const githubData = userGithubData[0];
-
-        //     // const htmlFile = generateHTML.generateHTML({ githubData });
-
-
-
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
-    // });
+}
 
