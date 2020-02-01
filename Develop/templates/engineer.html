@@ -1,14 +1,19 @@
 
 
-<div id="cardE" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-    <div class="card-header cardTitle">${engineerName}
-        <br>
-        <i class="fas fa-user-astronaut"></i>
-             Engineer
-    </div>
-    <div class="card-body bg-info cardContent">
-        <p class="card-text bg-info mb-3">ID: ${id}</p>
-        <p class="card-text bg-info mb-3">Email: <a href= "mailto: sevenspell@hotmail.com"> ${email}</a></p>
-        <p class="card-text bg-info mb-3">Github: <a href= "https://github.com/${usernameV}" target="blank"> https://github.com/${usernameV}</a></p>
+<div class="row justify-content-center">
+    <div class="col-sm-12 engineer">
+        <div id="cardE" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header cardTitle">${data.name}
+                <br>
+                <i class="fas fa-user-astronaut"></i>
+                Engineer
+            </div>
+            <div class="card-body bg-info cardContent">
+                <p class="card-text bg-info mb-3">ID: ${data.id}</p>
+                <p class="card-text bg-info mb-3">Email: <a href="mailto: ${data.email}"> ${data.email}</a></p>
+                <p class="card-text bg-info mb-3">Github: <a href="https://github.com/${data.github}" target="blank">
+                        https://github.com/${data.github}</a></p>
+            </div>
+        </div>
     </div>
 </div>

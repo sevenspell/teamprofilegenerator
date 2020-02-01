@@ -4,13 +4,7 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const fs = require("fs");
-
-// const mainHTML = require("./templates/main.html");
-// const managerHTML = require("./templates/manager.html");
-// const engineerHTML = require("./templates/engineer.html");
-// const internHTML = require("./templates/intern.html");
-
-
+const generateHTML = require("./generateHTML");
 
 //1. Prompt questions
 
@@ -19,7 +13,7 @@ const managerVerificationQuestion = [
         type: "confirm",
         message: "Entries are to be done by a manager. Are you a manager or is this done for a manager?",
         name: "managerV",
-    }
+    },
 ]
 
 const jobTitleVerfication = [
@@ -116,7 +110,7 @@ const internArray = [];
 // confirm if user is a manager. If so, answer Manager questions
 function startProcess() {
     inquirer.prompt(managerVerificationQuestion)
-        .then(({ managerV }) => {
+        .then(({ managerV, teamNameV }) => {
             if (`${managerV}` === "true") {
                 promptManagerQuestion(managerQuestions);
             } else {
@@ -143,9 +137,16 @@ function promptManagerQuestion(response) {
             managerArray.push(managerData);
             employeesArray.push(managerData);
 
+            employeesArray.forEach(function(employeesArray){
+                getEmployeeHTML(employeesArray);
+            })
+
             const moreManager = response.moreManagerV;
 
             createMoreManager(moreManager);
+
+        }).catch(function (error) {
+            console.log(error);
         })
 }
 
@@ -176,6 +177,16 @@ function promptEngineerQuestion() {
             engineerArray.push(engineerData);
             employeesArray.push(engineerData);
 
+            // employeesArray.forEach(function(employeesArray){
+            //     if (employeesArray.title === "Manager"){
+            //         return getEmployeeHTML(employeesArray)
+            //     }
+            // })
+
+            employeesArray.forEach(function(employeesArray){
+                getEmployeeHTML(employeesArray);
+            })
+
             promptRoleSelection(response);
         })
 }
@@ -198,34 +209,78 @@ function promptInternQuestion() {
             internArray.push(internData);
             employeesArray.push(internData);
 
+            // employeesArray.forEach(function(employeesArray){
+            //     if (employeesArray.title === "Manager"){
+            //         return getEmployeeHTML(employeesArray)
+            //     }
+            // })
+
+            employeesArray.forEach(function(employeesArray){
+                getEmployeeHTML(employeesArray);
+            })
+
             promptRoleSelection(response);
         })
 }
 
 //Let user select role to add. If user has finished updating all employees, end process.
 
-function promptRoleSelection(response){
+function promptRoleSelection(response) {
     inquirer.prompt(jobTitleVerfication)
-    .then((response) => {
-        
-        const title = response.titleV;
+        .then((response) => {
 
-        if (title === "Engineer"){
-            console.log("second try to see if it's " + title);
-            promptEngineerQuestion();
-        } else if (title === "Intern"){
-            console.log("second try to see if it's " + title);
-            promptInternQuestion();
-        } else {
-            console.log("Congratulations, you've completed the org chart.");
-            console.log("start: " + managerArray, engineerArray, managerArray, internArray, managerArray + " end")
-            console.log("start: " + employeesArray, employeesArray, employeesArray + " end")
-        }
-    })
+            const title = response.titleV;
+
+            if (title === "Engineer") {
+                promptEngineerQuestion();
+            } else if (title === "Intern") {
+                promptInternQuestion();
+            } else {
+                console.log("Congratulations, you've completed the org chart.");
+                // console.log("start: " + managerArray, engineerArray, managerArray, internArray, managerArray + " end")
+                // console.log("start: " + employeesArray, employeesArray, employeesArray + " end")
+            }
+        })
 }
 
 //start the process
 startProcess();
+
+
+function getMainHTML(response) {
+
+    const htmlMainFile = generateHTML.generateMainHTML(response);
+    console.log(htmlMainFile + " THIS IS MAIN HTML");
+
+}
+
+// getMainHTML();
+
+
+
+function getEmployeeHTML(data) {
+
+    var htmlManagerFile="";
+    var htmlEngineerFile="";
+    var htmlInternFile="";
+
+    if (data.title === "Manager"){
+        htmlManagerFile = generateHTML.generateManagerHTML(data);
+
+    } else if (data.title === "Engineer"){
+        htmlEngineerFile = generateHTML.generateEngineerHTML(data);
+
+    } else if (data.title === "Intern"){
+        htmlInternFile = generateHTML.generateInternHTML(data);
+
+    } else {
+        console.log("No HTML found");
+    }
+
+    const htmlEmployee = (htmlManagerFile + htmlEngineerFile + htmlInternFile)
+    console.log(htmlEmployee + " line 280")
+}
+
 
 
 
