@@ -1,7 +1,4 @@
 function generateMainHTML(htmlManager, htmlEngineer, htmlIntern) {
-    console.log("START LINE 2: " + htmlManager + " END LINE 2")
-    console.log("START LINE 3: " + htmlEngineer + " END LINE 3")
-    console.log("START LINE 4: " + htmlIntern + " END LINE 4")
 
     return `<html lang="en">
 
