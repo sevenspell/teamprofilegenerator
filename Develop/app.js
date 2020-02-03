@@ -134,12 +134,8 @@ function promptManagerQuestion(response) {
             const managerEmail = managerData.getEmail(response.mEmailV);
             const managerOfficeNum = managerData.getOfficeNumber(response.mOfficeNumberV);
 
-            managerArray.push(managerData);
+            // managerArray.push(managerData);
             employeesArray.push(managerData);
-
-            managerArray.forEach(function (employeesArray) {
-                getEmployeeHTML(employeesArray);
-            })
 
             const moreManager = response.moreManagerV;
 
@@ -174,12 +170,8 @@ function promptEngineerQuestion() {
             const engineerEmail = engineerData.getEmail(response.emailV);
             const engineerGithub = engineerData.getGithub(response.usernameV);
 
-            engineerArray.push(engineerData);
+            // engineerArray.push(engineerData);
             employeesArray.push(engineerData);
-
-            engineerArray.forEach(function (employeesArray) {
-                getEmployeeHTML(employeesArray);
-            })
 
             promptRoleSelection(response);
         })
@@ -200,12 +192,8 @@ function promptInternQuestion() {
             const internEmail = internData.getEmail(response.emailV);
             const internGithub = internData.getSchool(response.schoolV);
 
-            internArray.push(internData);
+            // internArray.push(internData);
             employeesArray.push(internData);
-
-            internArray.forEach(function (employeesArray) {
-                getEmployeeHTML(employeesArray);
-            })
 
             promptRoleSelection(response);
         })
@@ -225,7 +213,11 @@ function promptRoleSelection(response) {
                 promptInternQuestion();
             } else {
                 console.log("Congratulations, you've completed the org chart.");
-                getMainHTML(response, htmlEmployee);
+                //create HTML based on employeesArray title
+                getEmployeeHTML(employeesArray);
+                //insert employee HTML based on roles into main HTML
+                getMainHTML(htmlManager, htmlEngineer, htmlIntern);
+                //create team.html
                 createHTMLFile(htmlMainFile);
             }
         })
@@ -234,46 +226,46 @@ function promptRoleSelection(response) {
 //start the process
 startProcess()
 
-var htmlEmployee = [];
+//array to log HTML based on roles for each employee generated 
+var htmlManager = [];
+var htmlEngineer = [];
+var htmlIntern = [];
 
+//for each object in employeesArray, based on title, generate role-based HTML then push to role-based array
 function getEmployeeHTML(data) {
 
     var htmlManagerFile = "";
     var htmlEngineerFile = "";
     var htmlInternFile = "";
 
-    if (data.title === "Manager") {
-        htmlManagerFile = generateHTML.generateManagerHTML(data);
-        htmlEmployee.push(htmlManagerFile);
-    } else if (data.title === "Engineer") {
-        htmlEngineerFile = generateHTML.generateEngineerHTML(data);
-        htmlEmployee.push(htmlEngineerFile);
-    } else if (data.title === "Intern") {
-        htmlInternFile = generateHTML.generateInternHTML(data);
-        htmlEmployee.push(htmlInternFile);
-    } else {
-        console.log("No HTML found");
-    }
-
-    convertArrayToString(htmlEmployee);
+    employeesArray.forEach((employeesArray)=> {
+        if (employeesArray.title === "Manager") {
+            htmlManagerFile = generateHTML.generateManagerHTML(employeesArray);
+            htmlManager.push(htmlManagerFile);
+        } else if (employeesArray.title === "Engineer") {
+            htmlEngineerFile = generateHTML.generateEngineerHTML(employeesArray);
+            htmlEngineer.push(htmlEngineerFile);
+        } else if (employeesArray.title === "Intern") {
+            htmlInternFile = generateHTML.generateInternHTML(employeesArray);
+            htmlIntern.push(htmlInternFile);
+        } else {
+            console.log("No HTML found");
+        }
+    })
 }
 
-
-function convertArrayToString(htmlEmployee) {
-    var htmlEmployeeString = htmlEmployee.join("<br>");
-    console.log(htmlEmployeeString + "STRING TEST")
-}
-
-var htmlEmployeeString = "";
+//retrieve HTML array based on roles and replace comma with space for insertion into Main HTML
 var htmlMainFile = "";
 
-function getMainHTML(htmlEmployeeString) {
+function getMainHTML(htmlManager, htmlEngineer, htmlIntern) {
+    var htmlManagerString = htmlManager.join(" ");
+    var htmlEngineerString = htmlEngineer.join(" ");
+    var htmlInternString = htmlIntern.join(" ");
 
-    htmlMainFile = generateHTML.generateMainHTML(htmlEmployeeString);
-    console.log(htmlMainFile + " THIS IS MAIN HTML");
+    htmlMainFile = generateHTML.generateMainHTML(htmlManagerString, htmlEngineerString, htmlInternString);
 }
 
-
+//create team.html based on output
 function createHTMLFile(htmlMainFile) {
 
     fs.writeFile("./output/team.html", htmlMainFile, function (err) {

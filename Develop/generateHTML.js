@@ -1,4 +1,8 @@
-function generateMainHTML(data) {
+function generateMainHTML(htmlManager, htmlEngineer, htmlIntern) {
+    console.log("START LINE 2: " + htmlManager + " END LINE 2")
+    console.log("START LINE 3: " + htmlEngineer + " END LINE 3")
+    console.log("START LINE 4: " + htmlIntern + " END LINE 4")
+
     return `<html lang="en">
 
     <head>
@@ -93,7 +97,15 @@ function generateMainHTML(data) {
                 </div>
             </div>
             <div class="container">
-            ${data}
+                <div class="row justify-content-center">
+                    ${htmlManager}
+                </div>
+                <div class="row justify-content-center">
+                    ${htmlEngineer}
+                </div>
+                <div class="row justify-content-center">  
+                    ${htmlIntern}
+                </div>
             </div>
     
         </section>
@@ -114,62 +126,57 @@ function generateMainHTML(data) {
     
     </html>`};
 
+
 function generateManagerHTML(data) {
-    return `<div class="row justify-content-center">
-    <div class="col-sm-12 manager">
-        <div id="cardM" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-            <div class="card-header cardTitle">${data.name}
-                <br>
-                <i class="fas fa-user-tie"></i>
-                  Manager
-            </div>
-            <div class="card-body bg-warning cardContent">
-                <p class="card-text bg-warning mb-3">ID: ${data.id}</p>
-                <p class="card-text bg-warning mb-3">Email: <a href= "mailto: ${data.email}"> ${data.email}</a></p>
-                <p class="card-text bg-warning mb-3">Office Number: ${data.officeNumber}</p>
-            </div>
-        </div>
-    </div>
-</div>`
+    return `<div class="col-sm-3 manager">
+                <div id="cardM" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header cardTitle">${data.name}
+                    <br>
+                    <i class="fas fa-user-tie"></i>
+                    Manager
+                    </div>
+                    <div class="card-body bg-warning cardContent">
+                    <p class="card-text bg-warning mb-3">ID: ${data.id}</p>
+                    <p class="card-text bg-warning mb-3">Email: <a href= "mailto: ${data.email}"> ${data.email}</a></p>
+                    <p class="card-text bg-warning mb-3">Office Number: ${data.officeNumber}</p>
+                    </div>
+                </div>
+            </div>`
 };
 
 function generateEngineerHTML(data) {
-    return `<div class="row justify-content-center">
-    <div class="col-sm-12 engineer">
-        <div id="cardE" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-            <div class="card-header cardTitle">${data.name}
-                <br>
-                <i class="fas fa-user-astronaut"></i>
-                Engineer
-            </div>
-            <div class="card-body bg-info cardContent">
-                <p class="card-text bg-info mb-3">ID: ${data.id}</p>
-                <p class="card-text bg-info mb-3">Email: <a href="mailto: ${data.email}"> ${data.email}</a></p>
-                <p class="card-text bg-info mb-3">Github: <a href="https://github.com/${data.github}" target="blank">
+    return `<div class="col-sm-3 engineer">
+                <div id="cardE" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header cardTitle">${data.name}
+                    <br>
+                    <i class="fas fa-user-astronaut"></i>
+                    Engineer
+                    </div>
+                    <div class="card-body bg-info cardContent">
+                    <p class="card-text bg-info mb-3">ID: ${data.id}</p>
+                    <p class="card-text bg-info mb-3">Email: <a href="mailto: ${data.email}"> ${data.email}</a></p>
+                    <p class="card-text bg-info mb-3">Github: <a href="https://github.com/${data.github}" target="blank">
                         https://github.com/${data.github}</a></p>
-            </div>
-        </div>
-    </div>
-</div>`
+                    </div>
+                </div>
+            </div>`
 };
 
 function generateInternHTML(data) {
-    return `<div class="row justify-content-center">
-    <div class="col-sm-12 intern">
-        <div id="cardI" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-            <div class="card-header cardTitle">${data.name}
-                <br>
-                <i class="fas fa-user-graduate"></i>
-                Intern
-            </div>
-            <div class="card-body bg-primary cardContent">
-                <p class="card-text bg-primary mb-3">ID: ${data.id}</p>
-                <p class="card-text bg-primary mb-3">Email: <a href="mailto: ${data.email}"> ${data.email}</a></p>
-                <p class="card-text bg-primary mb-3">School: ${data.school}</p>
-            </div>
-        </div>
-    </div>
-</div>`
+    return `<div class="col-sm-3 intern">
+                <div id="cardI" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header cardTitle">${data.name}
+                    <br>
+                    <i class="fas fa-user-graduate"></i>
+                    Intern
+                    </div>
+                    <div class="card-body bg-primary cardContent">
+                    <p class="card-text bg-primary mb-3">ID: ${data.id}</p>
+                    <p class="card-text bg-primary mb-3">Email: <a href="mailto: ${data.email}"> ${data.email}</a></p>
+                    <p class="card-text bg-primary mb-3">School: ${data.school}</p>
+                    </div>
+                </div>
+            </div>`
 };
 
 
