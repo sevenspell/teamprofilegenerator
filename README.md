@@ -1,8 +1,8 @@
 # week10-assignment - Team Profile Generator
 
 GIF links
-https://github.com/sevenspell/week10-assignment/blob/master/week10gif1.gif
-https://github.com/sevenspell/week10-assignment/blob/master/week10gif2.gif
++ https://github.com/sevenspell/week10-assignment/blob/master/week10gif1.gif
++ https://github.com/sevenspell/week10-assignment/blob/master/week10gif2.gif
 
 ## Description 
 
@@ -16,6 +16,8 @@ Managers' cards would display their name, designation, employee ID, email and of
 Engineers' cards would display their name, designation, employee ID, email and Github profile link. 
 Interns' cards would display their name, designation, employee ID, email and their school.
 
+## Applications / Technology Used
++ Node
 
 ## Usage 
 
@@ -29,8 +31,8 @@ Interns' cards would display their name, designation, employee ID, email and the
 
 See GIFs for animated steps.
 
-https://github.com/sevenspell/week10-assignment/blob/master/week10gif1.gif
-https://github.com/sevenspell/week10-assignment/blob/master/week10gif2.gif
++ https://github.com/sevenspell/week10-assignment/blob/master/week10gif1.gif
++ https://github.com/sevenspell/week10-assignment/blob/master/week10gif2.gif
 
 
 ## Credits
